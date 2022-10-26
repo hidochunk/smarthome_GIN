@@ -1,4 +1,4 @@
-package model
+package form
 
 type IndexData struct {
 	Title   string
