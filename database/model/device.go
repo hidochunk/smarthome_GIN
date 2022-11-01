@@ -13,7 +13,7 @@ type Device struct {
 	DeviceName        string             `bson:"device_name,omitempty"`
 	CommunicationType string             `bson:"communication_type,omitempty"`
 	Topic             string             `bson:"topic,omitempty"`
-	Function          []Function         `bson:"function,omitempty"`
+	Functions         []Function         `bson:"functions,omitempty"`
 }
 
 func GetDeviceByDeviceType(DeviceType string) []*Device {
@@ -21,6 +21,27 @@ func GetDeviceByDeviceType(DeviceType string) []*Device {
 	DB := database.DB
 	coll := DB.Database("smarthome").Collection("device")
 	cursor, err := coll.Find(context.TODO(), bson.D{{"device_type", DeviceType}})
+	if err != nil {
+		panic(err)
+	}
+
+	for cursor.Next(context.TODO()) {
+		var temp Device
+		err = cursor.Decode(&temp)
+		if err != nil {
+			panic(err)
+		}
+		devices = append(devices, &temp)
+	}
+
+	return devices
+}
+
+func GetDeviceByCommunicationType(CommunicationType string) []*Device {
+	var devices []*Device
+	DB := database.DB
+	coll := DB.Database("smarthome").Collection("device")
+	cursor, err := coll.Find(context.TODO(), bson.D{{"communication_type", CommunicationType}})
 	if err != nil {
 		panic(err)
 	}

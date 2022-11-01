@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="">
+{{ range $device := . }}
+<h1>{{ .DeviceName }}</h1>
+{{ range $function := .Functions }}
+{{ template "buttonType" . }}
+{{ end }}
+<hr/>
+{{ end }}
+</html>

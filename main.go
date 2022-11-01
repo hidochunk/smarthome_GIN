@@ -1,18 +1,15 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
-	"smarthome_GIN/database/model"
 	"smarthome_GIN/routes"
 )
 
 func main() {
-	test := model.GetDeviceByDeviceType("lamp")
-	fmt.Println(test[0])
-
 	server := gin.Default()
-	server.LoadHTMLGlob("resources/views/*")
+	//open it if need to use function in .tmpl, and see how to use FuncMap
+	//routes.LoadFunctionMap(server)
+	server.LoadHTMLGlob("resources/**/*")
 	routes.WebRouter(server)
 
 	err := server.Run(":8080")
