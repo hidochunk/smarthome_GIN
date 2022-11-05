@@ -1,20 +1,13 @@
 {{ define "buttonType"}}
 
 {{ if eq .ButtonType "button" }}
-<button type="button">{{ .FunctionName }}</button>
+{{ template "button" . }}
 
 {{ else if eq .ButtonType "switch" }}
-<label class="switch">
-  <input type="checkbox">
-  <span class="slider"></span>
-</label>
+{{ template "switch" . }}
 
 {{ else if eq .ButtonType "dropdown" }}
-<select name={{ .FunctionName }} id={{ .FunctionName }}>
-{{ range .Options}}
-  <option value={{ .Message }}>{{ .Text }}</option>
-{{end}}
-</select>
+{{ template "dropdown" . }}
 
 {{ end }}
 {{ end }}

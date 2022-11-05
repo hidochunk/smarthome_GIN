@@ -1,0 +1,7 @@
+{{ define "dropdown"}}
+<select name={{ .FunctionName }} id={{ .FunctionName }}>
+{{ range .Options}}
+  <option value={{ .Message }}>{{ .Text }}</option>
+{{ end }}
+</select>
+{{ end }}
